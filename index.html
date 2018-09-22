@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!--Import materialize.css-->
+      	<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"  media="screen,projection"/>
+
+      	<!--Let browser know website is optimized for mobile-->
+     	 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+		<title>Xianxia Idle</title>
+
+	</head>
+	<body onload = "checkCookie();">
+
+		<script type="text/javascript" src="game.js"></script>
+		<!--Import jQuery before materialize.js-->
+      	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+      	<div class = "row">
+		<div class = "col s4">
+
+            <progress id = "progress" style = "width:100%" value="0" max="1"></progress>
+
+			<h4 style = "text-align: center;" id = "currentRealm">Mortal</h4> 
+
+            <a onclick = "rankup()" id = "rankupButton" class="waves-effect waves-light btn" style = "display: none;">Rankup</a>
+
+			<h6 style = "text-align: center;" id = "currentPower">Power: 0.1</h6>
+            <h6 style = "text-align: center;" id = "xp">XP: 0</h6>
+            <h6 style = "text-align: center;" id = "money">Money: 0</h6>
+
+			<input onclick = "increaseXp(xp, incrementAmount)" style = "width: 100%;" type = "image" src = "Assets/monk/(1)monk.png" id = "meditiate"></input>
+
+		</div>
+
+		<div class = "col s8">
+
+			<ul class="tabs">
+        		<li class="tab col s3"><a href="#fight">Fight</a></li>
+        		<li class="tab col s3"><a href="#train">Train</a></li>
+        		<li class="tab col s3"><a href="#shop">Shop</a></li>
+        		<li class="tab col s3"><a href="#legacy">Legacy</a></li>
+     		 </ul>
+
+     		 <div id = "fight">
+
+     		 	<table id = "fightTable">
+        			<thead>
+          				<tr>
+				              <th>Fight</th>
+				              <th>Enemy Power Level</th>
+				              <th>Reward</th>
+				        </tr>
+				    </thead>
+
+				    <tbody>
+				    <tr>
+				    	<td><a onclick = "Fight('firstFight')" id = "firstFight" class="waves-effect waves-light btn">Fight a Mortal</a><p id = "firstFightDefeat"></p></td>
+				        <td id = "firstFightPower">0.1</td>
+				        <td id = "firstFightReward">1</td>
+				    </tr>
+				    <tr>
+				        <td><a onclick = "Fight('secondFight')" id = "secondFight" class="waves-effect waves-light btn">Fight an arrogant young master</a><p id = "secondFightDefeat"></p></td>
+				        <td id = "secondFightPower">1.0</td>
+				        <td id = "secondFightReward">5</td>
+				    </tr>
+				    <tr>
+				        <td><a onclick = "Fight('thirdFight')" id = "thirdFight" class="waves-effect waves-light btn">Fight the young master's older brother</a><p id = "thirdFightDefeat"></p></td>
+				        <td id = "thirdFightPower">1.9</td>
+				        <td id = "thirdFightReward">25</td>
+				    </tr>
+				    <tr>
+				        <td><a onclick = "Fight('fourthFight')" id = "fourthFight" class="waves-effect waves-light btn">Fight the young master's elder</a><p id = "fourthFightDefeat"></p></td>
+				        <td id = "fourthFightPower">3.0</td>
+				        <td id = "fourthFightReward">125</td>
+				    </tr>
+				    <tr>
+				        <td><a onclick = "Fight('fifthFight')" id = "fifthFight" class="waves-effect waves-light btn">Fight the young master's Ancestor</a><p id = "fifthFightDefeat"></p></td>
+				        <td id = "fifthFightPower">4.3</td>
+				        <td id = "fifthFightReward">625</td>
+				    </tr>
+				    </tbody>
+				</table>
+
+     		 </div>
+
+     		 <div id = "train">
+
+     		 	<table id = "trainTable">
+
+     		 		<thead>
+
+     		 			<th>Training</th>
+     		 			<th>Cost</th>
+     		 			<th>Reward (increase to click power)</th>
+
+     		 		</thead>
+
+     		 		<tbody>
+
+     		 			<tr>
+
+     		 				<td><a onclick = "Train('firstTrain')" id = "firstTrain" class="waves-effect waves-light btn">Use a training Room</a></td>
+     		 				<td id = "firstTrainCost">1</td>
+     		 				<td id = "firstTrainReward">0.001</td>
+
+     		 			</tr>
+
+     		 			<tr>
+
+     		 				<td><a onclick = "Train('secondTrain')" id = "secondTrain" class="waves-effect waves-light btn">Use a training Courtyard</a></td>
+     		 				<td id = "secondTrainCost">10</td>
+     		 				<td id = "secondTrainReward">0.003</td>
+
+     		 			</tr>
+
+     		 			<tr>
+
+     		 				<td><a onclick = "Train('thirdTrain')" id = "thirdTrain" class="waves-effect waves-light btn">Get Guidance from a Xiantian</a></td>
+     		 				<td id = "thirdTrainCost">100</td>
+     		 				<td id = "thirdTrainReward">0.009</td>
+
+     		 			</tr>
+
+     		 			<tr>
+
+     		 				<td><a onclick = "Train('fourthTrain')" id = "fourthTrain" class="waves-effect waves-light btn">Try something beyond your limits</a></td>
+     		 				<td id = "fourthTrainCost">1000</td>
+     		 				<td id = "fourthTrainReward">0.027</td>
+
+     		 			</tr>
+
+     		 			<tr>
+
+     		 				<td><a onclick = "Train('fifthTrain')" id = "fifthTrain" class="waves-effect waves-light btn">Ponder the mysteries of the universe</a></td>
+     		 				<td id = "fifthTrainCost">10000</td>
+     		 				<td id = "fifthTrainReward">0.081</td>
+
+     		 			</tr>
+
+     		 		</tbody>
+
+
+     		 	</table>
+
+     		 </div>
+     		 <div id = "shop">
+
+     		 	<table id = "shopTable">
+
+     		 		<thead>
+
+     		 			<th>Buy</th>
+     		 			<th>Cost</th>
+     		 			<th>Use</th>
+
+     		 		</thead>
+
+     		 		<tbody>
+
+     		 			<tr style = "" id = "firstPurchaseRow">
+
+     		 				<td><a onclick = "firstSwordPurchase()" id = "firstPurchase" class="waves-effect waves-light btn">Basic Sword</a></td>
+     		 				<td id = "firstPurchaseCost">100</td>
+     		 				<td id = "firstPurchaseUse">Increase Power by 0.15</td>
+
+     		 			</tr>
+
+     		 			<tr style = "" id = "secondPurchaseRow">
+
+     		 				<td><a onclick = "firstManualPurchase()" id = "secondPurchase" class="waves-effect waves-light btn">Basic Sword Manual</a></td>
+     		 				<td id = "secondPurchaseCost">500</td>
+     		 				<td id = "secondPurchaseUse">Increase Power by 0.15</td>
+
+     		 			</tr>
+
+     		 			<tr style = "" id = "thirdPurchaseRow">
+
+     		 				<td><a onclick = "firstCultivationPurchase()" id = "thirdPurchase" class="waves-effect waves-light btn">Basic Cultivation Manual</a></td>
+     		 				<td id = "thirdPurchaseCost">750</td>
+     		 				<td id = "thirdPurchaseUse">0.1 extra power every future rankup</td>
+
+     		 			</tr>
+
+     		 			<tr style = "" id = "fourthPurchaseRow">
+
+     		 				<td><a onclick = "secondSwordPurchase()" id = "fourthPurchase" class="waves-effect waves-light btn">Low grade Holy Sword</a></td>
+     		 				<td id = "fourthPurchaseCost">10000</td>
+     		 				<td id = "fourthPurchaseUse">Increase Power by 0.15</td>
+
+     		 			</tr>
+
+     		 			<tr style = "" id = "fifthPurchaseRow">
+
+     		 				<td><a onclick = "secondManualPurchase()" id = "fifthPurchase" class="waves-effect waves-light btn">Intermediate Sword Manual</a></td>
+     		 				<td id = "fifthPurchaseCost">50000</td>
+     		 				<td id = "fifthPurchaseUse">Increase Power by 0.15</td>
+
+     		 			</tr>
+
+     		 			<tr style = "" id = "sixthPurchaseRow">
+
+     		 				<td><a onclick = "secondCultivationPurchase()" id = "sixthPurchase" class="waves-effect waves-light btn">Intermediate Cultivation Manual</a></td>
+     		 				<td id = "sixthPurchaseCost">75000</td>
+     		 				<td id = "sixthPurchaseUse">0.2 extra power every future rankup</td>
+
+     		 			</tr>
+
+     		 		</tbody>
+
+     		 	</table>
+
+     		 </div>
+             <div id = "legacy">
+
+                <h3>Legacy coming soon!</h3>
+
+            </div>
+		</div>
+	</div>
+
+	</body>
+</html>
